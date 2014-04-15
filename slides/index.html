@@ -97,6 +97,177 @@
 				</section>
 
 				<section>
+					<h3>Data Types</h3>
+					<ul>
+						<li>object
+						<li>function
+						<li>number
+						<li>string
+						<li>boolean
+						<li>null - a value that isn't anything
+						<li>undefined - default var/param
+					</ul>
+				</section>
+
+				<section>
+					<h3>Objects</h3>
+					<ul>
+						<li>Contains data and methods
+						<li>Can inherit other objects
+						<li>Is a map that contains any type of data
+						<li>Basically JSON
+					</ul>
+				</section>
+
+				<section>
+					<h3>Objects</h3>
+					<ul>
+						<li>Create using {}
+						<li>Passed by reference
+					</ul>
+				</section>
+
+				<section>
+					<h3>Object Example</h3>
+					<pre><code data-trim>
+var person = {
+	name: 'Grant Timmerman',
+	"height": 72 // inches,
+	dog: new Corgi()
+};
+var hisDog = person.dog;
+person['dog'].pet();
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Arrays</h3>
+					<ul>
+						<li> Inherits from Object
+						<li> No need to provide length
+						<li> Create using []
+					</ul>
+				</section>
+
+				<section>
+					<h3>Arrays Example</h3>
+					<pre><code data-trim>
+var doggies = ['Corgi!', 'Corgi!!', 'Corgi!!!'];
+var lastDoggie = doggies.pop();
+var numDoggiesLeft = doggies.length
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Array Methods</h3>
+					<ul>
+						<li>concat
+						<li>join
+						<li>pop
+						<li>push
+						<li>slice
+						<li>sort
+						<li>splice
+					</ul>
+				</section>
+
+				<section>
+					<h3>Functions</h3>
+					<ul>
+						<li>First class Objects
+						<li>Can be passed and stored like other variables
+						<li>Can store KV pairs
+						<li>Can be anonymous
+					</ul>
+				</section>
+
+				<section>
+					<h3>Functions cont...</h3>
+					<ul>
+						<li>Can contain other functions
+						<li>Determine scoping
+						<li>The inner functions can access the parent even after the function has returned -- called Closure
+						<li>No type checking
+					</ul>
+				</section>
+
+				<section>
+					<h3>Functions Example</h3>
+					<pre><code data-trim>
+var foo = {
+	baz: 10,
+	bar: function () {
+		// 'this' refers to the function
+		console.log(this.baz);
+	}
+};
+foo.bar(); // 10
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Functions Example</h3>
+					<pre><code data-trim>
+var global_var = 5;
+function test () {
+	// 'this' refers to the global scope
+	console.log(this.global_var);
+}
+test(); // 5
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Prototypes</h3>
+					<ul>
+						<li>JS has prototype inheritance, not classical inheritance
+						<li>This offers great expressive powers
+						<li>All objects are linked to Object.prototype
+					</ul>
+				</section>
+
+				<section>
+					<h3>Prototypes</h3>
+					<ul>
+						<li>When a member is accessed, the compiler looks at the object and looks up the prototype tree until the memeber is found, all the way to Object.prototype
+						<li>If it isn't found, it is set to undefined
+					</ul>
+				</section>
+
+				<section>
+					<h3>Prototype Example</h3>
+					<pre><code data-trim>
+var test = function (id) {
+	this.something = id;
+	this.foo = function () {
+		console.log('this is a test: '+ this.something);
+	}
+};
+var a = new Text(10);
+var b = new Test(111);
+
+a.foo();
+b.foo();
+
+Test.prototype.new_function = function () {
+	console.log('I am a new function');
+};
+a.new_function();
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Other useful commands</h3>
+					<ul>
+						<li>typeof '你好，世界' === 'string'
+						<li>'hello'.length === 5
+						<li>console.warn, console.info, console.debug
+						<li>console.time('timerName'); console.timeEnd('timerName');
+						<li>function 'arguments'
+					</ul>
+				</section>
+
+				<section>
 					<h2>So, node.js?</h2>
 					<ul>
 						<li>It's just Javascript.
@@ -254,87 +425,6 @@ node app.js
 					</pre>
 
 					<aside class="notes">Express CLI provides scaffolding. Provides sessions, CSS, templating etc. Walkthrough the project stub in 2-annotated.</aside>
-				</section>
-
-				<section>
-					<h2>MongoDB</h2>
-
-					<ul>
-						<li><a href="http://www.zdnet.com/what-is-nosql-and-why-do-you-need-it-7000004989">NoSQL database</a>
-						<li>Well documented, huge community
-						<li>Databases = Databases
-						<li>Collections = Tables
-						<li>Documents = Rows
-						<li>Nested documents
-					</ul>
-
-					<aside class="notes">
-						<p>NoSQL = no sql. Many different approaches.
-					</aside>
-				</section>
-
-				<section>
-					<h2>A Document</h2>
-					<pre><code data-trim>
-{
-    _id: 1234,
-    author: { name: "Bob Davis", email : "bob@bob.com" },
-    date: { $date: "2010-07-12 13:23UTC" },
-    location: [ -121.2322, 42.1223222 ],
-    comments: [
-       { user: "jgs32@hotmail.com",
-         upVotes: 22,
-         downVotes: 14,
-         text: "Great point! I agree" },
-       { user: "holly.davidson@gmail.com",
-         upVotes: 421,
-         downVotes: 22,
-         text: "You are a moron" }
-    ]
-}
-						</code></pre>
-				</section>
-
-				<section>
-					<h2>Quickstart</h2>
-
-					<pre><code data-trim>
-mongod 	// start the mongo server
-mongo 	// start the CLI
-help 	// show help contents
-					</code></pre>
-
-					<pre><code data-trim>
-show collections
-use newdb 	// make the DB on the fly
-show collections 	// show the collections in the DB
-db.collection1.save({1: 'a', 2: 'b'});
-db.collection1.find(); 	// return all documents
-db.collection1.find({1: 'a'}); 	// search for documents
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Mongoose</h2>
-
-					<ul>
-						<li>Mongoose extends native drivers to Node.js
-						<li>Define your own schema (models)
-						<li><pre>npm install mongoose</pre>
-					</ul>
-				</section>
-
-				<section data-background="#007777">
-					<h1>Ok so let's make something</h1>
-				</section>
-
-				<section data-background="#007777">
-					<h2>Blog</h2>
-
-					<p>List all posts</p>
-					<p>View individual posts</p>
-					<p>Add a post</p>
-					<p>Commenting?</p>
 				</section>
 
 				<section>
